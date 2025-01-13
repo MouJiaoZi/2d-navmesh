@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script src="lib/delaunator.js" defer></script>
+    <script src="src/main.js" defer></script>
+    <title>2D NavMesh</title>
+    <style>
+        body {
+            margin: auto;
+            text-align: center;
+            font-family: sans-serif;
+            background-color: #222;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
+            font-weight: bold;
+            color: white;
+            font-size: 12px;
+        }
+
+        .container {
+            position: relative;
+        }
+
+        canvas {
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .legend {
+            position: absolute;
+            right: -70px;
+            top: 2px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .row {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .square {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+        }
+
+        .tips {
+            position: absolute;
+            right: -80px;
+            bottom: 6px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <canvas id="canvas"></canvas>
+    <div class="legend">
+        <div class="row">
+            <div class="square" style="background-color: #d2efef"></div>
+            <div>起终点</div>
+        </div>
+        <div class="row">
+            <div class="square" style="background-color: #feb94a"></div>
+            <div>公共边</div>
+        </div>
+        <div class="row">
+            <div class="square" style="background-color: #ee938f"></div>
+            <div>网格路径</div>
+        </div>
+        <div class="row">
+            <div class="square" style="background-color: #aae062"></div>
+            <div>平滑路径</div>
+        </div>
+    </div>
+    <div class="tips">
+        <div class="item">点击设置起点</div>
+        <div class="item">滑动设置终点</div>
+    </div>
+</div>
+</body>
+</html>
