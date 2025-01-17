@@ -299,11 +299,20 @@ const getRenderPosition = ({ x, y }) => ({
 // 工具函数，保留几位
 const toFixed = (num, digits) => parseFloat(num.toFixed(digits));
 /** 画点 */
-const drawPoint = () => {
+const drawPoint = ({points}) => {
+  for (const p of points) {
+    const point = getRenderPosition({ x : p.x, y : p.y });
+    const radius = 2;
+    ctx.fillStyle = "#ff6398";
+    ctx.beginPath();
+    ctx.arc(point.x, point.y, radius, 0, Math.PI * 2);
+    ctx.closePath();
+    ctx.fill();
+  }
   for (const p of [startPoint, endPoint]) {
     const point = getRenderPosition({ x : p.x, y : p.y });
-    const radius = 4;
-    ctx.fillStyle = "#d2efef";
+    const radius = 3;
+    ctx.fillStyle = "#ff6398";
     ctx.beginPath();
     ctx.arc(point.x, point.y, radius, 0, Math.PI * 2);
     ctx.closePath();
@@ -311,7 +320,7 @@ const drawPoint = () => {
   }
 };
 /** 画线 */
-const drawEdge = ({ nodes }) => {
+const drawEdge = ({ nodes,nodePath }) => {
   for (const node of nodes) {
     const [a, b, c] = node.triangle;
     const p1 = getRenderPosition({ x : a.x, y : a.y });
@@ -324,11 +333,19 @@ const drawEdge = ({ nodes }) => {
     ctx.lineTo(p3.x, p3.y);
     ctx.closePath();
     // 填充
-    ctx.fillStyle = node.isObstacle ? "#ddd" : "transparent";
+    ctx.fillStyle =(()=>{
+      if(node.isObstacle){
+        return "#404040"
+      }else if(nodePath.some(n=>n === node)){
+        return "rgba(255,99,152,0.5)"
+      }else{
+        return "transparent";
+      }
+    })();
     ctx.fill();
     // 边框
-    ctx.lineWidth = 0.5;
-    ctx.strokeStyle = "#666";
+    ctx.lineWidth = 0.75;
+    ctx.strokeStyle = "#65ddfd";
     ctx.stroke();
     // 索引文字
     // ctx.font = "5px SimHei";
@@ -391,7 +408,7 @@ const drawSmoothedPath = ({ smoothedPath }) => {
     ctx.moveTo(cur.x, cur.y);
     ctx.lineTo(next.x, next.y);
     ctx.closePath();
-    ctx.lineWidth = 1.5;
+    ctx.lineWidth = 1.25;
     ctx.strokeStyle = "#aae062";
     ctx.stroke();
   }
@@ -497,7 +514,7 @@ const main = ({ startPoint, endPoint, canvas }) => {
 
   // 渲染
   ctx.clearRect(0, 0, width, height);
-  drawEdge({ nodes });
+  drawEdge({ nodes,nodePath });
   drawCommonEdge({ commonEdge });
   drawNodePath({ nodePath });
   drawSmoothedPath({ smoothedPath });
