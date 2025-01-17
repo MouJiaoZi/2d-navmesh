@@ -11,14 +11,14 @@
             margin: auto;
             text-align: center;
             font-family: sans-serif;
-            background-color: #222;
+            background-color: #111;
             display: flex;
             justify-content: center;
             align-items: center;
             width: 100vw;
             height: 100vh;
             font-weight: bold;
-            color: white;
+            color: #ddd;
             font-size: 16px;
         }
 
@@ -32,8 +32,9 @@
         }
 
         .legend {
+            width: 140px;
             position: absolute;
-            right: -90px;
+            right: -150px;
             top: 2px;
             display: flex;
             flex-direction: column;
@@ -54,7 +55,7 @@
 
         .tips {
             position: absolute;
-            right: -102px;
+            right: -106px;
             bottom: 6px;
             display: flex;
             flex-direction: column;
@@ -67,16 +68,20 @@
     <canvas id="canvas"></canvas>
     <div class="legend">
         <div class="row">
-            <div class="square" style="background-color: #d2efef"></div>
+            <div class="square" style="background-color: #ff6398"></div>
             <div>起终点</div>
+        </div>
+        <div class="row">
+            <div class="square" style="background-color: rgba(255,99,152,0.5)"></div>
+            <div>网格路径</div>
+        </div>
+        <div class="row">
+            <div class="square" style="background-color: #ee938f"></div>
+            <div>边中点路径</div>
         </div>
         <div class="row">
             <div class="square" style="background-color: #feb94a"></div>
             <div>公共边</div>
-        </div>
-        <div class="row">
-            <div class="square" style="background-color: #ee938f"></div>
-            <div>网格路径</div>
         </div>
         <div class="row">
             <div class="square" style="background-color: #aae062"></div>
