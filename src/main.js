@@ -445,7 +445,7 @@ const main = ({ startPoint, endPoint, canvas }) => {
   })();
   // 点集
   const points = [...map, ...obstacles.flat()];
-  // console.log("points",points)
+  console.log("points",points)
   // 三角剖分
   const triangles = generateTriangles(points);
   // 三角网格封装成node
